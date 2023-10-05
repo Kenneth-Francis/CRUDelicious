@@ -15,9 +15,11 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    [HttpGet("")]
+    public ViewResult Index()
     {
-        return View();
+        List<Dish> DishesFromDb = _context.Dishes.OrderBy(d => d.Name).ToList();
+        return View("Index", DishesFromDb);
     }
 
     public IActionResult Privacy()
